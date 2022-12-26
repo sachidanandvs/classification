@@ -28,3 +28,22 @@ class vgg16(nn.Module):
         return self.vgg16(x)
 
 
+class inceptionv3(nn.Module):
+    def __init__(self, num_classes,pretrained=False):
+        super(inceptionv3, self).__init__()
+        self.inceptionv3 = torchvision.models.inception_v3(pretrained=pretrained)
+        self.inceptionv3.fc = nn.Linear(2048, num_classes)
+
+    def forward(self, x):
+        return self.inceptionv3(x)
+
+class efficientnet(nn.Module):
+    def __init__(self, num_classes,pretrained=False):
+        super(efficientnet, self).__init__()
+        self.efficientnet = torchvision.models.efficientnet_v2_m(pretrained=pretrained)
+        self.efficientnet.classifier = nn.Linear(1280, num_classes)
+
+    def forward(self, x):
+        return self.efficientnet(x)
+
+
